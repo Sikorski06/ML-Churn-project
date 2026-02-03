@@ -1,12 +1,21 @@
+# --- Analiza Danych ---
 pandas
 numpy
-scikit-learn
 matplotlib
 seaborn
-jupyter
-joblib
-xgboost 
-optuna
-mlflow
-great_expectations
-imbalanced-learn
+
+# --- Machine Learning ---
+scikit-learn
+xgboost              # Model główny z filmu
+imbalanced-learn     # Do SMOTE (balansowanie)
+optuna               # Do tuningu (będzie w filmie później)
+
+# --- MLOps & Tracking ---
+mlflow               # Śledzenie eksperymentów
+joblib               # Zapisywanie modelu
+
+# --- Aplikacja & API (Faza 2) ---
+fastapi              # Serwer
+uvicorn              # Uruchamiacz serwera
+pydantic             # Walidacja danych
+python-multipart     # Potrzebne do przesyłania plików w API
