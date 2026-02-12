@@ -10,24 +10,24 @@ model_service = ChurnModel()
 # Definicja schematu danych wejściowych (Validation)
 class CustomerData(BaseModel):
     gender: str
-    SeniorCitizen: int
-    Partner: str
-    Dependents: str
+    seniorcitizen: int
+    partner: str
+    dependents: str
     tenure: int
-    PhoneService: str
-    MultipleLines: str
-    InternetService: str
-    OnlineSecurity: str
-    OnlineBackup: str
-    DeviceProtection: str
-    TechSupport: str
-    StreamingTV: str
-    StreamingMovies: str
-    Contract: str
-    PaperlessBilling: str
-    PaymentMethod: str
-    MonthlyCharges: float
-    TotalCharges: str  # Czasem przychodzi jako string
+    phoneservice: str
+    multipleLines: str
+    internetservice: str
+    onlinesecurity: str
+    onlinebackup: str
+    deviceprotection: str
+    techsupport: str
+    streamingtv: str
+    streamingmovies: str
+    contract: str
+    paperlessbilling: str
+    paymentmethod: str
+    monthlycharges: float
+    totalcharges: str  # Czasem przychodzi jako string
 
 @app.get("/")
 def health_check():
