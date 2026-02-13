@@ -1,0 +1,45 @@
+name: Continuous Integration (CI)
+
+# Kiedy ma się uruchomić ten workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Co dokładnie ma zrobić GitHub
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Uruchom na wirtualnym Linuxie
+
+    steps:
+      # Pobierz kod z repozytorium
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Skonfiguruj środowisko Pythona
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # Zainstaluj biblioteki
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Sprawdź, czy Dockerfile działa (Zbuduj kontener testowo)
+      - name: Build Docker Image
+        run: |
+          docker build -t churn-api:test .
+          
+      # Szybki test (Smoke Test) - sprawdzenie czy FastAPI się uruchamia
+      - name: Test if API starts (Smoke Test)
+        run: |
+          docker run -d -p 8000:8000 --name test-api churn-api:test
+          sleep 5
+          curl -f http://localhost:8000/ || exit 1
+          docker stop test-api
