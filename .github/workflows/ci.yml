@@ -43,3 +43,13 @@ jobs:
           sleep 5
           curl -f http://localhost:8000/ || exit 1
           docker stop test-api
+      
+      # Jeśli wszystko jest ok, to zaloguj się do Docker Hub i wypchnij obraz
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Tag Image
+        run: docker tag churn-api:test ${{ secrets.DOCKERHUB_USERNAME }}/churn-api:latest
+
+      - name: Push Image to Docker Hub
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/churn-api:latest
