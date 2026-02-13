@@ -14,8 +14,9 @@ optuna               # Do tuningu (będzie w filmie później)
 mlflow               # Śledzenie eksperymentów
 joblib               # Zapisywanie modelu
 
-# --- Aplikacja & API (Faza 2) ---
+# --- Aplikacja & API ---
 fastapi              # Serwer
 uvicorn              # Uruchamiacz serwera
 pydantic             # Walidacja danych
 python-multipart     # Potrzebne do przesyłania plików w API
+gradio               # Interfejs graficzny UI

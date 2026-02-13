@@ -1,0 +1,18 @@
+# Ignorujemy środowiska wirtualne
+venv/
+env/
+
+# Ignorujemy pliki tymczasowe Pythona
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorujemy historię Gita i logi
+.git/
+.gitignore
+mlruns/
+*.log
+
+# Ignorujemy notebooki
+*.ipynb
