@@ -53,4 +53,20 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          # Usuwamy starą historię (tylko na maszynie testowej, GitHub jest bezpieczny)
+          rm -rf .git
+          
+          # Inicjujemy czystego Gita i włączamy śledzenie LFS dla modeli
+          git init
+          git config --global user.email "bot@github.com"
+          git config --global user.name "GitHub Actions"
+          git lfs install
+          git lfs track "*.joblib"
+          git lfs track "*.db"
+          
+          # Zapisujemy wszystko w jednym, czystym commicie
+          git add .
+          git commit -m "Deploy to HF Spaces"
+          
+          # 4. Wysyłamy siłowo na Hugging Face
           git push https://Sikorski06:${HF_TOKEN}@huggingface.co/spaces/Sikorski06/Telco-Churn-Predictor main -f
