@@ -1,3 +1,12 @@
+---
+title: Telco Churn Predictor
+emoji: 🔮
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+app_port: 7860
+---
 # End-to-End Machine Learning Project: Telco Customer Churn 
 
 [![CI/CD Pipeline](https://github.com/Sikorski06/ML-Churn-project/actions/workflows/ci.yml/badge.svg)](https://github.com/Sikorski06/ML-Churn-project/actions)
