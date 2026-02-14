@@ -58,6 +58,7 @@ jobs:
           
           # Inicjujemy czystego Gita i włączamy śledzenie LFS dla modeli
           git init
+          git branch -M main
           git config --global user.email "bot@github.com"
           git config --global user.name "GitHub Actions"
           git lfs install
