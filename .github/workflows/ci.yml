@@ -30,7 +30,6 @@ jobs:
         run: |
           docker build -t churn-api:test .
           
-      # ZMIANA: Robot testuje teraz port 7860
       - name: Test if API starts (Smoke Test)
         run: |
           docker run -d -p 7860:7860 --name test-api churn-api:test
@@ -47,7 +46,7 @@ jobs:
       - name: Push Image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/churn-api:latest
 
-      # --- WYSYŁANIE NA HUGGING FACE SPACES ---
+      # WYSYŁANIE NA HUGGING FACE SPACES
       - name: Push to Hugging Face Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
