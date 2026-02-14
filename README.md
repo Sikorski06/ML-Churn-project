@@ -52,4 +52,6 @@ docker build -t churn-api .
 docker run -p 7860:7860 churn-api
 ```
 **Step 4: Access the UI**
+
+
 Navigate to `http://localhost:7860/ui` in your web browser.
