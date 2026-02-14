@@ -1,39 +1,55 @@
-
-# Telco Customer Churn Prediction | End-to-End MLOps
+# End-to-End Machine Learning Project: Telco Customer Churn 
 
 [![CI/CD Pipeline](https://github.com/Sikorski06/ML-Churn-project/actions/workflows/ci.yml/badge.svg)](https://github.com/Sikorski06/ML-Churn-project/actions)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Live%20Demo-orange.svg)](https://huggingface.co/spaces/Sikorski06/Telco-Churn-Predictor)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Live%20Demo-Hugging%20Face-orange.svg)](https://huggingface.co/spaces/Sikorski06/Telco-Churn_Predictor)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Live Demo:** [Try the deployed application here](https://huggingface.co/spaces/Sikorski06/Telco-Churn-Predictor)
+> **Try the Live Application:** [Hugging Face Spaces Deployment](https://huggingface.co/spaces/Sikorski06/Telco-Churn-Predictor)
 
-## Project Overview
-This project goes beyond a standard Jupyter Notebook analysis. It is a **production-ready Machine Learning pipeline** designed to predict telecommunications customer churn. Built with a strong MLOps mindset, the system emphasizes business value, robust software engineering principles, and fully automated deployment.
 
-## Key Differentiators (Why this project stands out)
-* **Business-Driven Metric Optimization:** Instead of blindly chasing standard accuracy, the XGBoost model is dynamically threshold-tuned specifically for **Recall**. In the Telco industry, the cost of a false negative (missing a churning customer) is significantly higher than a false positive.
-* **Resilient Architecture:** The machine learning inference logic is strictly decoupled from the serving layer (`FastAPI`).
-* **Foolproof UI/UX:** The `Gradio` frontend includes strict input validation (e.g., numeric-only inputs for charges, default safe states, and dynamic fallback mapping for categories like "Other" gender) to prevent backend API crashes and ensure inclusivity.
-* **Fully Automated CI/CD:** A custom `GitHub Actions` workflow automatically runs smoke tests, builds the Docker image, pushes it to `Docker Hub` as an artifact, and continuously deploys to `Hugging Face Spaces` upon every push to the main branch.
+## Project Overview & Business Problem
+Customer retention is one of the most critical metrics in the telecommunications industry. Acquiring a new customer can cost up to 5 times more than retaining an existing one. 
 
-## Technology Stack
-* **Modeling & Data:** Python, Pandas, Scikit-learn, XGBoost, Optuna (Hyperparameter Tuning)
-* **API & Serving:** FastAPI, Uvicorn, Pydantic (Data Validation)
-* **Frontend:** Gradio
-* **Infrastructure & MLOps:** Docker, GitHub Actions (CI/CD), Docker Hub, Hugging Face Spaces
+The goal of this project is to build an **End-to-End Machine Learning pipeline** that predicts whether a customer is likely to churn (leave the company). This allows the business to proactively identify at-risk customers and offer targeted retention campaigns.
 
-## Architecture & Repository Structure
-The codebase follows strict structural standards, separating data processing, model training, and serving infrastructure:
+**Unlike standard notebook tutorials, this project is fully modularized, containerized, and deployed to the cloud using CI/CD automation.**
 
-```text
-ML-Churn-project/
-├── .github/workflows/   # CI/CD automation pipelines (YAML)
-├── src/                 # Main source code
-│   ├── data/            # Data loading and validation scripts
-│   ├── features/        # Feature engineering and encoding logic
-│   ├── model/           # XGBoost training, evaluation, and thresholding
-│   ├── serving/         # Inference logic and model loading classes
-│   └── app/             # FastAPI backend and Gradio UI integration
-├── Dockerfile           # Container definition
-├── requirements.txt     # Project dependencies
-└── README.md
+## Project Architecture
+The system is designed with MLOps best practices, separating the data processing, model training, and the serving API.
+
+1. **Data processing & Modeling:** XGBoost classifier tuned via Optuna.
+2. **Serving Layer:** A robust `FastAPI` backend wrapped around the model.
+3. **User Interface:** A foolproof `Gradio` frontend designed for end-users (e.g., call center agents).
+4. **Containerization:** The entire application is packaged inside a `Docker` container.
+5. **CI/CD Pipeline:** `GitHub Actions` automatically builds, tests (Smoke Testing), and pushes the image to `Docker Hub` and `Hugging Face Spaces`.
+
+## Key Engineering Highlights (What makes this unique)
+* **Optimized for Business Value (Recall):** Instead of standard accuracy, the threshold of the XGBoost model is dynamically tuned specifically for **Recall**. In churn prediction, False Negatives (missing a churning customer) are the most expensive mistakes.
+* **Foolproof UI / Backend Protection:** The frontend handles edge cases gracefully. For example, selecting a non-standard "Other" gender dynamically maps to a safe fallback (`safe_gender`) to prevent internal server errors during inference, ensuring an inclusive yet unbreakable application.
+* **Automated Cloud Deployment:** Every push to the `main` branch triggers a workflow that safely deploys the latest version to the public internet.
+
+## Tech Stack
+* **Machine Learning:** `Python`, `Scikit-learn`, `XGBoost`, `Optuna`
+* **API Development:** `FastAPI`, `Uvicorn`, `Pydantic`
+* **Frontend:** `Gradio`
+* **DevOps / MLOps:** `Docker`, `GitHub Actions`, `Docker Hub`, `Hugging Face Spaces`
+
+## Getting Started (Local Development)
+
+Because the project is fully Dockerized, running it locally requires zero manual Python environment configuration.
+
+**Step 1: Clone the repository**
+```bash
+git clone [https://github.com/Sikorski06/ML-Churn-project.git](https://github.com/Sikorski06/ML-Churn-project.git)
+cd ML-Churn-project
+```
+**Step 2: Build the Docker Image**
+```bash
+docker build -t churn-api .
+```
+**Step 3: Run the Container**
+```bash
+docker run -p 7860:7860 churn-api
+```
+**Step 4: Access the UI**
+Navigate to `http://localhost:7860/ui` in your web browser.
